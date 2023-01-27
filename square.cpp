@@ -1,11 +1,14 @@
 #include "square.hpp"
 
 Square::Square() {
-    std::cout << "Quadrato creato" << std::endl;
+}
 
+Square::Square(std::string color): _color(color){
 }
 
 Square::~Square() {
-    std::cout << "Quadrato distrutto" << std::endl;
+}
 
+std::string Square::getColor() {
+    return _color;
 }

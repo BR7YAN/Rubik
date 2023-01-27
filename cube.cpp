@@ -1,31 +1,45 @@
 #include "cube.hpp"
 
 Cube::Cube() {
-    _arrFace.insert(std::pair<std::string, Face *>("white", new Face("white")));
-    _arrFace.insert(std::pair<std::string, Face *>("black", new Face("black")));
-    _arrFace.insert(std::pair<std::string, Face *>("red", new Face("red")));
-    std::cout << "Cubo creato" << std::endl;
+    _arrFace.insert(std::pair<std::string, Face *>("front", new Face("front", FrontGreen)));
+    _arrFace.insert(std::pair<std::string, Face *>("back", new Face("back", BackYellow)));
+    _arrFace.insert(std::pair<std::string, Face *>("right", new Face("right", RightRed)));
+    _arrFace.insert(std::pair<std::string, Face *>("left", new Face("left", LeftOrange)));
+    _arrFace.insert(std::pair<std::string, Face *>("up", new Face("up", UpWhite)));
+    _arrFace.insert(std::pair<std::string, Face *>("down", new Face("down", DownBlue)));
 }
 
 Cube::~Cube() {
     this->deleteFaces();
-    std::cout << "Cubo distrutto" << std::endl;
 }
 
 void Cube::deleteFaces() {
-    // for (face_iter i = _arrFace.begin(); i != _arrFace.end(); i++) {
-    //     std::cout << "elemento = " << i->first << std::endl;
-    //     Face *face = i->second;
-    //     delete face;
-    //     _arrFace.erase(i->first);
-    // }
-
         face_iter i = _arrFace.begin();
         while (i != _arrFace.end()) {
-            std::cout << "elemento = " << i->first << std::endl;
             Face *face = i->second;
             delete face;
             i = _arrFace.erase(i);
-            //std::cout << "elemento = " << i->first << std::endl;
     }
+}
+
+void Cube::printFace(std::string side) {
+    _arrFace[side]->printFace();
+}
+
+void Cube::upClockwise () {
+    _arrFace["front"]->change1thRow(_arrFace["right"]->getRow(1));
+}
+
+// void Cube::upClockwise () {
+    
+// }
+
+void Cube::printMe() {
+    _arrFace["front"]->printFace();
+    _arrFace["back"]->printFace();
+    _arrFace["right"]->printFace();
+    _arrFace["left"]->printFace();
+    _arrFace["up"]->printFace();
+    _arrFace["down"]->printFace();
+    std::cout << std::endl;
 }
