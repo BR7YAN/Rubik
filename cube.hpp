@@ -26,6 +26,8 @@ class Cube {
         void downClockwise();
         void rightClockWise();
         void leftClockWise();
+        void frontClockWise();
+        void backClockWise();
 };
 
 #endif

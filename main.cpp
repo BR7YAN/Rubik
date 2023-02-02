@@ -6,7 +6,8 @@ int main () {
     Cube cubo;
     //cubo.upClockwise();
     //cubo.downClockwise();
-    cubo.rightClockWise();
-    cubo.leftClockWise();
+    //cubo.rightClockWise();
+    //cubo.leftClockWise();
+    cubo.frontClockWise();
     cubo.printMe();
 }
