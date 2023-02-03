@@ -38,23 +38,26 @@ void Face::printFace() {
 }
 
 void Face::swapRow(int i, std::vector<Square *> & rowToSwap) {
-    if (i == 1)
-        this->unoFila.swap(rowToSwap);
-    else if (i == 3)
-        this->treFila.swap(rowToSwap);
+    if (i == 1) {
+        //this->unoFila.swap(rowToSwap);
+        std::swap(unoFila[0], rowToSwap[0]);
+        std::swap(unoFila[1], rowToSwap[1]);
+        std::swap(unoFila[2], rowToSwap[2]);
+    }
+    else if (i == 3){
+        //this->treFila.swap(rowToSwap);
+        std::swap(treFila[0], rowToSwap[0]);
+        std::swap(treFila[1], rowToSwap[1]);
+        std::swap(treFila[2], rowToSwap[2]);
+    }
 }
 
-void Face::swapColumn(int i, std::vector<Square *> *column) {
-    if (i == 1) {
-        std::swap(unoFila[0], (*column)[0]);
-        std::swap(dueFila[0], (*column)[1]);
-        std::swap(treFila[0], (*column)[2]);
-    }
-    else {
-        std::swap(unoFila[2], (*column)[0]);
-        std::swap(dueFila[2], (*column)[1]);
-        std::swap(treFila[2], (*column)[2]);
-    }
+void Face::swapColumn(int index, std::vector<Square *> *column, bool reverse) {
+    if (reverse)
+        std::reverse((*column).begin(), (*column).end());
+    std::swap(unoFila[index], (*column)[0]);
+    std::swap(dueFila[index], (*column)[1]);
+    std::swap(treFila[index], (*column)[2]);
 }
 
 //Continuando a fare 3 swap invece di 4, la variabile clockwise qui si
@@ -62,54 +65,48 @@ void Face::swapColumn(int i, std::vector<Square *> *column) {
 //Per esempio se facciamo il movimento F clockwise, la variabile clockwise
 //assumera il valore di false in quanto stiamo facendo lo swap tra la
 //3 riga della faccia UP e la 3 colonna della faccia left
-void Face::swapColumnWithRow(bool clockwise, std::vector<Square *> *column) {
-    if (clockwise) {
-        std::swap(unoFila[2], (*column)[0]);
-        std::swap(unoFila[1], (*column)[1]);
-        std::swap(unoFila[0], (*column)[2]);
-    }
-    else {
-        std::cout  << unoFila[0] << std::endl;
-        std::cout  << (*column)[0] << std::endl;
-        
-        std::cout  << unoFila[0]->getColor() << std::endl;
-        std::cout  << (*column)[0]->getColor() << std::endl;
+void Face::swapColumnWithRow(int row, std::vector<Square *> * column, bool reverse) {
+    // if (clockwise) {
+    //     std::swap(unoFila[2], (*column)[0]);
+    //     std::swap(unoFila[1], (*column)[1]);
+    //     std::swap(unoFila[0], (*column)[2]);
+    // }
+    // else {
 
-        Square * element0 = (*column)[0];
-        Square * element1 = (*column)[1];
-        Square * element2 = (*column)[2];
-
-        (*column)[0] = unoFila[0];
-        (*column)[1] = unoFila[1];
-        (*column)[2] = unoFila[2];
-
-        *unoFila[0] = *element0;
-        *unoFila[1] = *element1;
-        *unoFila[2] = *element2;
-
-        // std::swap(unoFila[0], (*column)[0]);
-        // std::swap(unoFila[1], (*column)[1]);
-        // std::swap(unoFila[2], (*column)[2]);
-
-        std::cout  << unoFila[0]->getColor() << std::endl;
-        std::cout  << (*column)[0]->getColor() << std::endl;
-
-        std::cout  << unoFila[0] << std::endl;
-        std::cout  << (*column)[0] << std::endl;
-    }
+        // Square element0 = *(*column)[0];
+        // Square element1 = *(*column)[1];
+        // Square element2 = *(*column)[2];
+        // *(*column)[0] = *unoFila[0];
+        // *(*column)[1] = *unoFila[1];
+        // *(*column)[2] = *unoFila[2];
+        // *unoFila[0] = element0;
+        // *unoFila[1] = element1;
+        // *unoFila[2] = element2;
+        if (reverse)
+            std::reverse((*column).begin(), (*column).end());
+        if (row == 1) {
+            std::swap(*unoFila[0], *(*column)[0]);
+            std::swap(*unoFila[1], *(*column)[1]);
+            std::swap(*unoFila[2], *(*column)[2]);
+        } else {
+            std::swap(*treFila[0], *(*column)[0]);
+            std::swap(*treFila[1], *(*column)[1]);
+            std::swap(*treFila[2], *(*column)[2]);
+        }
+    // }
 }
 
-void Face::swapColumnWithRow(bool clockwise, std::vector<Square *> & rowToSwap) {
-    if (clockwise) {
-        std::swap(unoFila[0], rowToSwap[0]);
-        std::swap(dueFila[0], rowToSwap[1]);
-        std::swap(treFila[0], rowToSwap[2]);
-    }
-    else {
-        std::swap(unoFila[2], rowToSwap[2]);
-        std::swap(dueFila[2], rowToSwap[1]);
-        std::swap(treFila[2], rowToSwap[0]);
-    }
+void Face::swapColumnWithRow(int index, std::vector<Square *> & rowToSwap) {
+    // if (clockwise) {
+        std::swap(unoFila[index], rowToSwap[0]);
+        std::swap(dueFila[index], rowToSwap[1]);
+        std::swap(treFila[index], rowToSwap[2]);
+    // }
+    // else {
+        // std::swap(unoFila[2], rowToSwap[2]);
+        // std::swap(dueFila[2], rowToSwap[1]);
+        // std::swap(treFila[2], rowToSwap[0]);
+    // }
 }
 
 

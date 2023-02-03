@@ -28,9 +28,9 @@ class Face {
         ~Face();
         void printFace();
         void swapRow(int i, std::vector<Square *> & rowToSwap);
-        void swapColumn(int i, std::vector<Square *> * column);
-        void swapColumnWithRow(bool clockwise, std::vector<Square *> * column);
-        void swapColumnWithRow(bool clockwise, std::vector<Square *> & rowToSwap);
+        void swapColumn(int index, std::vector<Square *> *column, bool reverse);
+        void swapColumnWithRow(int row, std::vector<Square *> * column, bool reverse);
+        void swapColumnWithRow(int index, std::vector<Square *> & rowToSwap);
         void autoRotate(bool clockwise);
         std::string getSide(){ return _side; }
         std::vector<Square *> & getRow(int index);

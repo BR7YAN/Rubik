@@ -4,10 +4,14 @@
 //int main (int ac, char **av) {
 int main () {
     Cube cubo;
-    //cubo.upClockwise();
-    //cubo.downClockwise();
-    //cubo.rightClockWise();
-    //cubo.leftClockWise();
-    cubo.frontClockWise();
+    // cubo.upClockwise();
+    // cubo.downClockwise();
+    // cubo.leftClockWise();
+    // cubo.rightClockWise();
+    // cubo.frontClockWise();
+    cubo.backClockWise();
+    // cubo.frontClockWise();
+    // cubo.frontClockWise();
+    // cubo.frontClockWise();
     cubo.printMe();
 }

@@ -40,39 +40,41 @@ void Cube::downClockwise () {
     _arrFace["down"]->autoRotate(true); // ???
 }
 
-void Cube::rightClockWise () { //da ridurre swapColumn da 4 a 2
-    std::vector<Square *> *ret  = _arrFace["front"]->getColumn(3);
-    _arrFace["up"]->swapColumn(3, ret);
-    _arrFace["back"]->swapColumn(3, ret);
-    _arrFace["down"]->swapColumn(3, ret);
-    _arrFace["front"]->swapColumn(3, ret);
+void Cube::rightClockWise () {
+    std::vector<Square *> *ret  = _arrFace["down"]->getColumn(3);
+    _arrFace["front"]->swapColumn(2, ret, false);
+    _arrFace["up"]->swapColumn(2, ret, false);
+    _arrFace["back"]->swapColumn(0, ret, true);
+    _arrFace["down"]->swapColumn(2, ret, true);
     _arrFace["right"]->autoRotate(true); // ???
     delete ret;
 }
 
-void Cube::leftClockWise () { //da ridurre swapColumn da 4 a 2
-    std::vector<Square *> *ret  = _arrFace["front"]->getColumn(1);
-    _arrFace["down"]->swapColumn(1, ret);
-    _arrFace["back"]->swapColumn(1, ret);
-    _arrFace["up"]->swapColumn(1, ret);
-    _arrFace["front"]->swapColumn(1, ret);
+void Cube::leftClockWise () {
+    std::vector<Square *> *ret  = _arrFace["up"]->getColumn(1);
+    _arrFace["front"]->swapColumn(0, ret, false);
+    _arrFace["down"]->swapColumn(0, ret, false);
+    _arrFace["back"]->swapColumn(2, ret, true);
+    _arrFace["up"]->swapColumn(0, ret, true);
     _arrFace["left"]->autoRotate(true); // ???
     delete ret;
 }
 
 void Cube::frontClockWise() {
-    //_arrFace["left"]->swapColumnWithRow(false, _arrFace["up"]->getRow(3));
+    _arrFace["right"]->swapColumnWithRow(0, _arrFace["up"]->getRow(3));
     std::vector<Square *> *ret  = _arrFace["left"]->getColumn(3);
-    _arrFace["down"]->swapColumnWithRow(false, ret);
-    //std::swap(_arrFace["down"]->unoFila[0], (*ret)[0]);
-    //_arrFace["right"]->swapColumnWithRow(false, _arrFace["down"]->getRow(1));
-    //_arrFace["front"]->autoRotate(true); // ???
-    // _arrFace["left"]->
-    //delete ret;
+    _arrFace["up"]->swapColumnWithRow(3, ret, true);
+    _arrFace["down"]->swapColumnWithRow(1, ret, true);
+    _arrFace["front"]->autoRotate(true); // ???
+    delete ret;
 }
 
-void Cube::backClockWise () {
-
+void Cube::backClockWise () { //manca backclockwise
+    _arrFace["right"]->swapColumnWithRow(2, _arrFace["up"]->getRow(1));
+    std::vector<Square *> *ret  = _arrFace["right"]->getColumn(3);
+    _arrFace["down"]->swapColumnWithRow(3, ret, true);
+    _arrFace["down"]->swapColumnWithRow(1, ret, true);
+    delete ret;
 }
 
 void Cube::printMe() {
